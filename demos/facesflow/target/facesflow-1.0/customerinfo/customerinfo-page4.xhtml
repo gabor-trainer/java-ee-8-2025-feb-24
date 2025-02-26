@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Customer Information</title>
     </h:head>
@@ -10,9 +11,19 @@
         <h:form>
             <h:panelGrid columns="2">
                 <h:outputLabel for="email" value="Email"/>
-                <h:inputText id="email" value="#{customer.email}"/>
+                <h:inputText id="email" value="#{customer.email}">
+                    <f:attribute name="email" value="#{customer.email}" />
+                </h:inputText>
+
                 <h:outputLabel for="emailConfirm" value="Confirm Email"/>
-                <h:inputText id="emailConfirm" value="#{customer.emailConfirm}"/>
+                <h:inputText id="emailConfirm" value="#{customer.emailConfirm}">
+                    <f:validator validatorId="emailMatchValidator"/>
+                    <f:attribute name="emailComponent" value="email" />
+                </h:inputText>
+
+                <h:message for="emailConfirm" style="color:red"/>
+
+
                 <h:commandButton value="Previous" action='#{customer.previous()}'/>
                 <h:commandButton value="Next" action='#{customer.next()}'/>
 
