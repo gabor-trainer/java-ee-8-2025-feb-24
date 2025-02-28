@@ -24,15 +24,10 @@ public class SelectQueryDemoBean {
         String retVal = "confirmation";
 
         try {
-
-            String queryText = "SELECT s FROM UsState s WHERE";
-            if ( true) {
-                queryText += "s.usStateNm LIKE :p";
-            }
-            else {
-                queryText += "s.xxx  LIKE :p";
-            }
-            Query query = entityManager.createQuery(queryText);
+            Query query = entityManager
+                    .createQuery(
+                            "SELECT s FROM UsState s WHERE s.usStateNm "
+                            + "LIKE :name");
 
             query.setParameter("name", "New%");
             
@@ -41,6 +36,9 @@ public class SelectQueryDemoBean {
             if (matchingStatesStream != null) {
                 matchingStatesList = matchingStatesStream.collect(Collectors.toList());
             }
+            matchingStatesStream.filter()
+            matchingStatesStream.sorted(
+
 
         } catch (Exception e) {
             retVal = "error";
